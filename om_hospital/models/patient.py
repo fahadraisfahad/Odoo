@@ -7,6 +7,7 @@ class HospitalPatient(models.Model):
     _name = "hospital.patient"                #  show in database like this (hospital_patient)
     _inherit = ['mail.thread' , 'mail.activity.mixin']
     _description = "Hospital Patient"
+    # _rec_name ='name'    By default no need to deine b/c we have made name field
 
 
     name = fields.Char(string="Name" , tracking = True)
@@ -19,6 +20,9 @@ class HospitalPatient(models.Model):
 
     gender = fields.Selection([('male','Male'),('female','Female')],string = "Gender" , tracking = True, default='female')
     active = fields.Boolean(String="Active", default=True)
+    # appointment_id = fields.many2One('hospital.appointment', string="Patient") -- ERRoR
+
+
 
 
     @api.depends('date_of_birth')       ### decorator
@@ -26,9 +30,9 @@ class HospitalPatient(models.Model):
     def _compute_age(self):
         for rec in self:
             today = date.today()
-        if rec.date_of_birth:
-            rec.age = today.year - rec.date_of_birth.year
-        else:
-            rec.age = 1
+            if rec.date_of_birth:
+                rec.age = today.year - rec.date_of_birth.year
+            else:
+                rec.age = 1
        
         
