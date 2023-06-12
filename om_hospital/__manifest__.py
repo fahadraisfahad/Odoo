@@ -16,7 +16,7 @@
         'views/female_patient_view.xml',
         'views/appointment_view.xml',
         'reports/report_button.xml',
-        'reports/report_template.xml',
+        #'reports/report_template.xml',
     ],
     'demo':[],
     'application':'True',         # in search second tab and first tab both true
